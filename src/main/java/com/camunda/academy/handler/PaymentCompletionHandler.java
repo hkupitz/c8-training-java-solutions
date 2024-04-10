@@ -4,10 +4,9 @@ import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.JobClient;
 import io.camunda.zeebe.client.api.worker.JobHandler;
-import java.util.Map;
-import java.util.Random;
 
 public class PaymentCompletionHandler implements JobHandler {
+
   private ZeebeClient zeebeClient;
 
   public PaymentCompletionHandler(ZeebeClient zeebeClient) {

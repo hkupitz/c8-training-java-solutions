@@ -1,14 +1,12 @@
 package com.camunda.academy.handler;
 
 import com.camunda.academy.services.CustomerService;
-import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.JobClient;
 import io.camunda.zeebe.client.api.worker.JobHandler;
-import java.util.Random;
-import org.checkerframework.checker.units.qual.C;
 
 public class CreditDeductionHandler implements JobHandler {
+
   private CustomerService customerService = new CustomerService();
 
   @Override

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class PaymentInvocationHandler implements JobHandler {
+
   private ZeebeClient zeebeClient;
 
   public PaymentInvocationHandler(ZeebeClient zeebeClient) {
