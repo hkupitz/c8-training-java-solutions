@@ -1,5 +1,8 @@
 package com.camunda.academy.services;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CreditCardService {
 
   public void chargeAmount(String cardNumber, String cvc, String expiryDate, Double amount) {
