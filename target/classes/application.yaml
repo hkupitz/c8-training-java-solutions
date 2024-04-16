@@ -1,6 +1,0 @@
-zeebe.client:
-  cloud:
-    region: bru-2
-    clusterId: 5a09e61f-d80c-49ad-84ba-ad5166592252
-    clientId: tbNoahv62T7CtWav3bXYtnKtKcS-awa3
-    clientSecret: 48LYmTm~AOrqoElu4Nnl0OqIDlp-f53pEsDnRhcKCK9PUPSdnPlMa47Rl7Cvhz2d
