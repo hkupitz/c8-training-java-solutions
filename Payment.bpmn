@@ -22,14 +22,14 @@
       <bpmn:outgoing>Flow_1pztzhb</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0mgtgv1" name="Yes" sourceRef="Gateway_0tguusb" targetRef="Gateway_1sc74ys">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=orderTotal &lt;= customerCredit</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=openAmount &lt;= 0</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_01h2mrh" name="Payment completed">
       <bpmn:incoming>Flow_1pztzhb</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1pztzhb" sourceRef="Gateway_1sc74ys" targetRef="Event_01h2mrh" />
     <bpmn:sequenceFlow id="Flow_0hm4nsv" name="No" sourceRef="Gateway_0tguusb" targetRef="Activity_17cgxb1">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=orderTotal &gt; customerCredit</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=openAmount &gt; 0</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ly1cuh" sourceRef="Activity_17cgxb1" targetRef="Gateway_1sc74ys" />
     <bpmn:serviceTask id="Activity_17cgxb1" name="Charge credit card">
@@ -41,7 +41,7 @@
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_06we2x6" name="Deduct credit">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="test" />
+        <zeebe:taskDefinition type="credit-deduction" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0yir2wn</bpmn:incoming>
       <bpmn:outgoing>Flow_1fag6do</bpmn:outgoing>
@@ -64,17 +64,17 @@
       <bpmndi:BPMNShape id="Gateway_1sc74ys_di" bpmnElement="Gateway_1sc74ys" isMarkerVisible="true">
         <dc:Bounds x="655" y="93" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_05xu7ho_di" bpmnElement="Activity_17cgxb1">
-        <dc:Bounds x="500" y="190" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_15ytrgi_di" bpmnElement="Activity_06we2x6">
-        <dc:Bounds x="240" y="78" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_01h2mrh_di" bpmnElement="Event_01h2mrh">
         <dc:Bounds x="752" y="100" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="745" y="143" width="51" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05xu7ho_di" bpmnElement="Activity_17cgxb1">
+        <dc:Bounds x="500" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15ytrgi_di" bpmnElement="Activity_06we2x6">
+        <dc:Bounds x="240" y="78" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0yir2wn_di" bpmnElement="Flow_0yir2wn">
         <di:waypoint x="186" y="118" />
