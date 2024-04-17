@@ -5,6 +5,7 @@ import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.JobClient;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.annotation.Variable;
+import java.time.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +25,12 @@ public class CreditCardChargingHandler {
     @Variable Double orderTotal) {
     System.out.println("Job handled: " + job.getType());
 
-    creditCardService.chargeAmount(cardNumber, cvc, expiryDate, orderTotal);
-
-    client.newCompleteCommand(job.getKey()).send();
+    try {
+      creditCardService.chargeAmount(cardNumber, cvc, expiryDate, orderTotal);
+      client.newCompleteCommand(job.getKey()).send();
+    } catch (IllegalArgumentException exception) {
+      client.newFailCommand(job.getKey()).retries(0).retryBackoff(Duration.ZERO).errorMessage(exception.getMessage())
+        .send().join();
+    }
   }
 }
