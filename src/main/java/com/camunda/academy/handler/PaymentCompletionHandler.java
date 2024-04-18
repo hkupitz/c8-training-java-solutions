@@ -17,9 +17,11 @@ public class PaymentCompletionHandler {
   public void handlePaymentCompletion(JobClient jobClient, ActivatedJob job) {
     System.out.println("Job handled: " + job.getType());
 
+    String messageName = (String) job.getVariable("messageName");
+
     // Tell order process to continue
     zeebeClient.newPublishMessageCommand()
-      .messageName("paymentCompletedMessage")
+      .messageName(messageName)
       .correlationKey(String.valueOf(job.getVariable("orderId")))
       .send().join();
 

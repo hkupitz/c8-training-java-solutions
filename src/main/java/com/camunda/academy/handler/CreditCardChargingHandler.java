@@ -29,7 +29,12 @@ public class CreditCardChargingHandler {
       creditCardService.chargeAmount(cardNumber, cvc, expiryDate, orderTotal);
       client.newCompleteCommand(job.getKey()).send();
     } catch (IllegalArgumentException exception) {
-      client.newFailCommand(job.getKey()).retries(0).retryBackoff(Duration.ZERO).errorMessage(exception.getMessage())
+      client.newThrowErrorCommand(job.getKey())
+        .errorCode("expiryDateInvalidError")
+        .send().join();
+    } catch (Exception e) {
+      client.newFailCommand(job.getKey()).retries(0).retryBackoff(Duration.ZERO)
+        .errorMessage(e.getMessage())
         .send().join();
     }
   }

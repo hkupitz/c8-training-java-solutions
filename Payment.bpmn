@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="f140ca4" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="acbe8290-ac45-42af-885d-dfe7e53bcd89">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="8c03b57" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="acbe8290-ac45-42af-885d-dfe7e53bcd89">
   <bpmn:process id="PaymentProcess" name="Payment Process" isExecutable="true">
     <bpmn:sequenceFlow id="Flow_0yir2wn" sourceRef="StartEvent_1" targetRef="Activity_06we2x6" />
     <bpmn:exclusiveGateway id="Gateway_0tguusb" name="Credit sufficient?">
@@ -14,7 +14,7 @@
       <bpmn:outgoing>Flow_1pztzhb</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0mgtgv1" name="Yes" sourceRef="Gateway_0tguusb" targetRef="Gateway_1sc74ys">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=openAmount &lt;= 0</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=111111</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1pztzhb" sourceRef="Gateway_1sc74ys" targetRef="Event_01h2mrh" />
     <bpmn:sequenceFlow id="Flow_0hm4nsv" name="No" sourceRef="Gateway_0tguusb" targetRef="Activity_17cgxb1">
@@ -47,12 +47,31 @@
     <bpmn:endEvent id="Event_01h2mrh" name="Payment completed">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="payment-completion" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=&#34;paymentCompletionMessage&#34;" target="messageName" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1pztzhb</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1ewsdg6" />
     </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_1h3w10b" name="Expiry date invalid" attachedToRef="Activity_17cgxb1">
+      <bpmn:outgoing>Flow_0boecu9</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0s86bbi" errorRef="Error_1nc7cji" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_0boecu9" sourceRef="Event_1h3w10b" targetRef="Event_1awjg8l" />
+    <bpmn:endEvent id="Event_1awjg8l" name="Payment failed">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="payment-completion" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=&#34;paymentFailureMessage&#34;" target="messageName" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0boecu9</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1i4mklo" />
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_0ungdil" name="paymentRequestedMessage" />
+  <bpmn:error id="Error_1nc7cji" name="Expiry date invalid" errorCode="expiryDateInvalidError" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PaymentProcess">
       <bpmndi:BPMNShape id="Gateway_0tguusb_di" bpmnElement="Gateway_0tguusb" isMarkerVisible="true">
@@ -77,9 +96,21 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1d7qwxb_di" bpmnElement="Event_01h2mrh">
-        <dc:Bounds x="762" y="110" width="36" height="36" />
+        <dc:Bounds x="822" y="110" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="755" y="153" width="51" height="27" />
+          <dc:Bounds x="815" y="153" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yr71dy_di" bpmnElement="Event_1awjg8l">
+        <dc:Bounds x="822" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="804" y="385" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0nurso7_di" bpmnElement="Event_1h3w10b">
+        <dc:Bounds x="542" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="455" y="305" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0yir2wn_di" bpmnElement="Flow_0yir2wn">
@@ -99,7 +130,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1pztzhb_di" bpmnElement="Flow_1pztzhb">
         <di:waypoint x="715" y="128" />
-        <di:waypoint x="762" y="128" />
+        <di:waypoint x="822" y="128" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0hm4nsv_di" bpmnElement="Flow_0hm4nsv">
         <di:waypoint x="430" y="153" />
@@ -113,6 +144,11 @@
         <di:waypoint x="610" y="240" />
         <di:waypoint x="690" y="240" />
         <di:waypoint x="690" y="153" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0boecu9_di" bpmnElement="Flow_0boecu9">
+        <di:waypoint x="560" y="298" />
+        <di:waypoint x="560" y="360" />
+        <di:waypoint x="822" y="360" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

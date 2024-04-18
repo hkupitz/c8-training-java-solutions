@@ -11,6 +11,7 @@ public class CreditCardService {
         cardNumber, expiryDate, cvc, amount, System.lineSeparator());
       System.out.println("payment completed");
     } else {
+      System.out.println("credit card invalid");
       throw new IllegalArgumentException("Expiry date invalid: " + expiryDate);
     }
   }
