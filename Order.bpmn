@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="8c03b57" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="6439e7e6-6b1c-467f-88c7-309b6d0b0712">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="74f16d4" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="6439e7e6-6b1c-467f-88c7-309b6d0b0712">
   <bpmn:process id="OrderProcess" name="Order Process" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Order requested">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="camundaModeler:exampleOutputJson" value="{&#10;  &#34;orderTotal&#34;: 45.99,&#10;  &#34;customerId&#34;: &#34;cust30&#34;,&#10;  &#34;cardNumber&#34;: &#34;1234 5678&#34;,&#10;  &#34;cvc&#34;: &#34;123&#34;,&#10;  &#34;expiryDate&#34;: &#34;09/24&#34;,&#10;  &#34;productId&#34;: &#34;3&#34;&#10;}" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0hmm839</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sendTask id="Activity_1ra1zbq" name="Invoke payment">

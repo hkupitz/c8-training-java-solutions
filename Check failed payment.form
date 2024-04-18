@@ -1,0 +1,132 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.5.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "74f16d4"
+  },
+  "schemaVersion": 16,
+  "id": "FailedPaymentForm",
+  "components": [
+    {
+      "text": "### Check the failed payment",
+      "type": "text",
+      "id": "Heading_0",
+      "layout": {
+        "row": "row_0",
+        "columns": null
+      }
+    },
+    {
+      "components": [
+        {
+          "type": "textfield",
+          "id": "Textfield_2",
+          "label": "Card Number",
+          "validate": {
+            "required": false
+          },
+          "key": "cardNumber",
+          "layout": {
+            "row": "Row_11e1u0o",
+            "columns": null
+          },
+          "readonly": true
+        },
+        {
+          "type": "textfield",
+          "id": "Textfield_3",
+          "label": "CVC",
+          "validate": {
+            "required": false
+          },
+          "key": "cvc",
+          "layout": {
+            "row": "Row_01az810",
+            "columns": null
+          },
+          "readonly": true
+        },
+        {
+          "type": "textfield",
+          "id": "Textfield_4",
+          "label": "Expiry Date",
+          "validate": {
+            "required": false
+          },
+          "key": "expiryDate",
+          "layout": {
+            "row": "Row_10jgoly",
+            "columns": null
+          }
+        }
+      ],
+      "showOutline": true,
+      "label": "Credit Card Information",
+      "type": "group",
+      "layout": {
+        "row": "Row_1lxvxjr",
+        "columns": null
+      },
+      "id": "Field_0yfhlx6"
+    },
+    {
+      "components": [
+        {
+          "type": "number",
+          "id": "Number_5",
+          "label": "Order Total",
+          "validate": {
+            "step": 0.01,
+            "required": false
+          },
+          "key": "orderTotal",
+          "layout": {
+            "row": "Row_0ju6hvt",
+            "columns": null
+          },
+          "readonly": true
+        },
+        {
+          "type": "number",
+          "id": "Number_6",
+          "label": "Open Amount",
+          "validate": {
+            "step": 0.01,
+            "required": false
+          },
+          "key": "openAmount",
+          "layout": {
+            "row": "Row_1prvtu2",
+            "columns": null
+          },
+          "readonly": true
+        }
+      ],
+      "showOutline": true,
+      "label": "Order Information",
+      "type": "group",
+      "layout": {
+        "row": "Row_0q8rl3i",
+        "columns": null
+      },
+      "id": "Field_0ujwjgz"
+    },
+    {
+      "type": "checkbox",
+      "id": "Checkbox_7",
+      "label": "Were you able to resolve the error?",
+      "defaultValue": false,
+      "validate": {
+        "required": false
+      },
+      "key": "errorResolved",
+      "layout": {
+        "row": "row_4",
+        "columns": null
+      }
+    }
+  ],
+  "generated": true,
+  "type": "default"
+}
