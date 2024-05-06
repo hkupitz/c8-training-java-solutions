@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0agyjve" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="fb20fa0" camunda:diagramRelationId="dc73af46-7148-4201-97e2-d26a40db2a99" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="discount" name="Order Discount">
+    <decisionTable id="DecisionTable_0ig5jaw">
+      <input id="Input_1" label="Order amount">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>orderTotal</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Discount percentage" name="discount" typeRef="number" />
+      <rule id="DecisionRule_1w6f2bs">
+        <inputEntry id="UnaryTests_048ae7p">
+          <text>&lt; 40.00</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fpycfp">
+          <text>0</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0usptbq">
+        <inputEntry id="UnaryTests_11btskh">
+          <text>[40.00..60.00[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ef7iyq">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0q3h94y">
+        <inputEntry id="UnaryTests_100wlin">
+          <text>[60.00..100.00[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_177r14t">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tc55ch">
+        <inputEntry id="UnaryTests_0lio5ir">
+          <text>&gt;= 100.00</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07op33r">
+          <text>4</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="discountOrderTotal" name="Discount OrderTotal">
+    <variable id="InformationItem_16bpe0b" name="discountedAmount" typeRef="number" />
+    <informationRequirement id="InformationRequirement_1i23w2a">
+      <requiredDecision href="#discount" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_1w05nqj">
+      <text>round half down (orderTotal - (orderTotal * discount / 100), 2)</text>
+    </literalExpression>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="discount">
+        <dc:Bounds height="80" width="180" x="160" y="220" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_11xhqky" dmnElementRef="InformationRequirement_1i23w2a">
+        <di:waypoint x="250" y="220" />
+        <di:waypoint x="250" y="180" />
+        <di:waypoint x="250" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1xs1cxq" dmnElementRef="discountOrderTotal">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
