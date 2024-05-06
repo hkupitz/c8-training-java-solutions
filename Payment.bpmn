@@ -32,20 +32,14 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=orderTotal &gt; customerCredit</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ly1cuh" sourceRef="Activity_17cgxb1" targetRef="Gateway_1sc74ys" />
-    <bpmn:serviceTask id="Activity_17cgxb1" name="Charge credit card">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="credit-card-charging" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0hm4nsv</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ly1cuh</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_06we2x6" name="Deduct credit">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="credit-deduction" />
-      </bpmn:extensionElements>
+    <bpmn:task id="Activity_06we2x6" name="Deduct credit">
       <bpmn:incoming>Flow_0yir2wn</bpmn:incoming>
       <bpmn:outgoing>Flow_1fag6do</bpmn:outgoing>
-    </bpmn:serviceTask>
+    </bpmn:task>
+    <bpmn:task id="Activity_17cgxb1" name="Charge credit card">
+      <bpmn:incoming>Flow_0hm4nsv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ly1cuh</bpmn:outgoing>
+    </bpmn:task>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PaymentProcess">
@@ -70,11 +64,11 @@
           <dc:Bounds x="745" y="143" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_05xu7ho_di" bpmnElement="Activity_17cgxb1">
-        <dc:Bounds x="500" y="190" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_15ytrgi_di" bpmnElement="Activity_06we2x6">
+      <bpmndi:BPMNShape id="Activity_03lc4mp_di" bpmnElement="Activity_06we2x6">
         <dc:Bounds x="240" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xpabh2_di" bpmnElement="Activity_17cgxb1">
+        <dc:Bounds x="500" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0yir2wn_di" bpmnElement="Flow_0yir2wn">
         <di:waypoint x="186" y="118" />
