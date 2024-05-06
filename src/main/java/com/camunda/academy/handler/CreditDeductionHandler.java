@@ -12,20 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreditDeductionHandler {
 
-  private CustomerService customerService;
-
-  @Autowired
-  public CreditDeductionHandler(CustomerService customerService) {
-    this.customerService = customerService;
-  }
-
   @JobWorker(type = "credit-deduction", autoComplete = false)
-  public void handleCreditDeduction(JobClient client, ActivatedJob job, @Variable String customerId,
-    @Variable Number orderTotal) {
+  public void handleCreditDeduction(JobClient client, ActivatedJob job) {
     System.out.println("Job handled: " + job.getType());
 
-    Double openAmount = customerService.deductCredit(customerId, orderTotal.doubleValue());
-
-    client.newCompleteCommand(job.getKey()).variables(Map.of("openAmount", openAmount)).send();
+    client.newCompleteCommand(job.getKey()).send();
   }
 }
