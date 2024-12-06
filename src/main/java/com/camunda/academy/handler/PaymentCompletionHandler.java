@@ -10,13 +10,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentCompletionHandler {
 
+  private final ZeebeClient zeebeClient;
+
   @Autowired
-  private ZeebeClient zeebeClient;
+  public PaymentCompletionHandler(ZeebeClient zeebeClient) {
+    this.zeebeClient = zeebeClient;
+  }
 
   @JobWorker(type = "payment-completion", autoComplete = false)
   public void handlePaymentCompletion(JobClient jobClient, ActivatedJob job) {
     System.out.println("Job handled: " + job.getType());
 
+    // Get message name from input variable to differentiate between success & failure
     String messageName = (String) job.getVariable("messageName");
 
     // Tell order process to continue
