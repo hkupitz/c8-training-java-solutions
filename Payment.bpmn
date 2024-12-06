@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="f140ca4" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="acbe8290-ac45-42af-885d-dfe7e53bcd89">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.29.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0" camunda:diagramRelationId="acbe8290-ac45-42af-885d-dfe7e53bcd89">
   <bpmn:process id="PaymentProcess" name="Payment Process" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Payment requested">
       <bpmn:extensionElements>
@@ -22,14 +22,14 @@
       <bpmn:outgoing>Flow_1pztzhb</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0mgtgv1" name="Yes" sourceRef="Gateway_0tguusb" targetRef="Gateway_1sc74ys">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=openAmount &lt;= 0</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=customerCredit &gt;= orderTotal</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_01h2mrh" name="Payment completed">
       <bpmn:incoming>Flow_1pztzhb</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1pztzhb" sourceRef="Gateway_1sc74ys" targetRef="Event_01h2mrh" />
     <bpmn:sequenceFlow id="Flow_0hm4nsv" name="No" sourceRef="Gateway_0tguusb" targetRef="Activity_17cgxb1">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=openAmount &gt; 0</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=customerCredit &lt; orderTotal</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ly1cuh" sourceRef="Activity_17cgxb1" targetRef="Gateway_1sc74ys" />
     <bpmn:serviceTask id="Activity_17cgxb1" name="Charge credit card">
