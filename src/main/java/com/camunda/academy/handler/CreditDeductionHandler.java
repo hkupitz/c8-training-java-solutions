@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreditDeductionHandler {
 
-  private CustomerService customerService;
+  private final CustomerService customerService;
 
   @Autowired
   public CreditDeductionHandler(CustomerService customerService) {
