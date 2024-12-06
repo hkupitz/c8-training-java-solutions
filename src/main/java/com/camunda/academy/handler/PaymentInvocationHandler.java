@@ -12,8 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentInvocationHandler {
 
+  private final ZeebeClient zeebeClient;
+
   @Autowired
-  private ZeebeClient zeebeClient;
+  public PaymentInvocationHandler(ZeebeClient zeebeClient) {
+    this.zeebeClient = zeebeClient;
+  }
 
   @JobWorker(type = "payment-invocation", autoComplete = false)
   public void handlePaymentInvocation(JobClient jobClient, ActivatedJob job) {

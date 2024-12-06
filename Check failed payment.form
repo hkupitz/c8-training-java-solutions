@@ -1,12 +1,4 @@
 {
-  "executionPlatform": "Camunda Cloud",
-  "executionPlatformVersion": "8.5.0",
-  "exporter": {
-    "name": "Camunda Web Modeler",
-    "version": "74f16d4"
-  },
-  "schemaVersion": 16,
-  "id": "FailedPaymentForm",
   "components": [
     {
       "text": "### Check the failed payment",
@@ -18,11 +10,12 @@
       }
     },
     {
+      "label": "Credit Card Information",
       "components": [
         {
+          "label": "Card Number",
           "type": "textfield",
           "id": "Textfield_2",
-          "label": "Card Number",
           "validate": {
             "required": false
           },
@@ -34,9 +27,9 @@
           "readonly": true
         },
         {
+          "label": "CVC",
           "type": "textfield",
           "id": "Textfield_3",
-          "label": "CVC",
           "validate": {
             "required": false
           },
@@ -48,9 +41,9 @@
           "readonly": true
         },
         {
+          "label": "Expiry Date",
           "type": "textfield",
           "id": "Textfield_4",
-          "label": "Expiry Date",
           "validate": {
             "required": false
           },
@@ -62,7 +55,6 @@
         }
       ],
       "showOutline": true,
-      "label": "Credit Card Information",
       "type": "group",
       "layout": {
         "row": "Row_1lxvxjr",
@@ -71,11 +63,12 @@
       "id": "Field_0yfhlx6"
     },
     {
+      "label": "Order Information",
       "components": [
         {
+          "label": "Order Total",
           "type": "number",
           "id": "Number_5",
-          "label": "Order Total",
           "validate": {
             "step": 0.01,
             "required": false
@@ -88,9 +81,9 @@
           "readonly": true
         },
         {
+          "label": "Open Amount",
           "type": "number",
           "id": "Number_6",
-          "label": "Open Amount",
           "validate": {
             "step": 0.01,
             "required": false
@@ -104,7 +97,6 @@
         }
       ],
       "showOutline": true,
-      "label": "Order Information",
       "type": "group",
       "layout": {
         "row": "Row_0q8rl3i",
@@ -113,9 +105,9 @@
       "id": "Field_0ujwjgz"
     },
     {
+      "label": "Were you able to resolve the error?",
       "type": "checkbox",
       "id": "Checkbox_7",
-      "label": "Were you able to resolve the error?",
       "defaultValue": false,
       "validate": {
         "required": false
@@ -127,6 +119,14 @@
       }
     }
   ],
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.29.0"
+  },
+  "schemaVersion": 17,
+  "id": "FailedPaymentForm",
   "generated": true,
   "type": "default"
 }
