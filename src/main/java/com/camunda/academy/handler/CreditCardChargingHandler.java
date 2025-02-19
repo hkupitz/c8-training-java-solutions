@@ -21,10 +21,10 @@ public class CreditCardChargingHandler {
   @JobWorker(type = "credit-card-charging", autoComplete = false)
   public void handleCreditDeduction(JobClient client, ActivatedJob job,
     @Variable String cardNumber, @Variable String expiryDate, @Variable String cvc,
-    @Variable Double orderTotal) {
+    @Variable Double openAmount) {
     System.out.println("Job handled: " + job.getType());
 
-    creditCardService.chargeAmount(cardNumber, cvc, expiryDate, orderTotal);
+    creditCardService.chargeAmount(cardNumber, cvc, expiryDate, openAmount);
 
     client.newCompleteCommand(job.getKey()).send();
   }
